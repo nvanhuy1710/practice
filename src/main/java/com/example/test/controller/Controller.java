@@ -31,7 +31,7 @@ public class Controller {
     }
 
     @GetMapping("/todo/{id}")
-    public ResponseEntity<Student> getStudent(@PathVariable String id) {
+    public ResponseEntity<Student> getStudent(@PathVariable Integer id) {
         return ResponseEntity.ok(repository.findById(id));
     }
 
@@ -41,7 +41,8 @@ public class Controller {
             return ResponseEntity.badRequest().body(errors);
         }
         
-        String id = Integer.toString(repository.findAll().size() + 1);
+        //String id = Integer.toString(repository.findAll().size() + 1);
+        Integer id = repository.getLast() + 1;
         Student result = repository.save(StudentBuilder.create()
                 .withId(id).withName(student.getName()).withOld(student.getOld())
                 .withDTB(student.getDTB()).build());
@@ -51,7 +52,7 @@ public class Controller {
     }
 
     @DeleteMapping("/todo/{id}")
-    public ResponseEntity<Student> deleteStudent(@PathVariable String id) {
+    public ResponseEntity<Student> deleteStudent(@PathVariable Integer id) {
         repository.delete(repository.findById(id));
         return ResponseEntity.noContent().build();
     }

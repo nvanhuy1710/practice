@@ -10,7 +10,9 @@ public interface CommonRepository<T> {
 
     public void delete(T domain);
 
-    public T findById(String id);
+    public T findById(Integer id);
 
     public Set<T> findAll();
+
+    public Integer getLast();
 }

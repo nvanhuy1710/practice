@@ -13,7 +13,7 @@ import com.example.test.domain.Student;
 
 @Repository
 public class StudentRepository implements CommonRepository<Student> {
-    private Map<String, Student> students = new HashMap<>();
+    private Map<Integer, Student> students = new HashMap<>();
 
     @Override
     public Student save(Student domain) {
@@ -42,15 +42,15 @@ public class StudentRepository implements CommonRepository<Student> {
     }
 
     @Override
-    public Student findById(String id) {
+    public Student findById(Integer id) {
         return students.get(id);
     }
 
     @Override
     public Set<Student> findAll() {
         Set<Student> a = new TreeSet<>(new SortId());
-        Set<String> b = students.keySet();
-        for (String c : b) {
+        Set<Integer> b = students.keySet();
+        for (Integer c : b) {
             a.add(students.get(c));
         }
         return a;
@@ -65,6 +65,19 @@ public class StudentRepository implements CommonRepository<Student> {
             int b = Integer.valueOf(o2.getId());
             return (a > b) ? 1 : -1;
         }
+    }
+
+    @Override
+    public Integer getLast() {
+        Integer d = 0;
+        Set<Integer> b = students.keySet();
+        for (Integer c : b) {
+            Student tmp = students.get(c);
+            if(d < tmp.getId()) {
+                d = tmp.getId();
+            }
+        }
+        return d;
     }
 }
 

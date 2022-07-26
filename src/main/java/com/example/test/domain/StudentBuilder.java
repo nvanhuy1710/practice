@@ -2,7 +2,7 @@ package com.example.test.domain;
 
 public class StudentBuilder {
     private static StudentBuilder instance = new StudentBuilder();
-    private String id = null;
+    private Integer id = null;
     private String name = null;
     private Integer old = null;
     private Float DTB = null;
@@ -15,7 +15,7 @@ public class StudentBuilder {
         return instance;    
     }
 
-    public StudentBuilder withId(String id) {
+    public StudentBuilder withId(Integer id) {
         this.id = id;
         return instance;
     }
@@ -36,10 +36,10 @@ public class StudentBuilder {
     }
 
     public Student build() {
-        Student result = new Student(this.name, this.old, this.DTB);
-        if(id != null) {
-            result.setId(id);
-        }
+        Student result = new Student(this.id, this.name, this.old, this.DTB);
+        // if(id != null) {
+        //     result.setId(id);
+        // }
         return result;
     }
 }
