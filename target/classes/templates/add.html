@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+        <head>Add student</head>
+        <form th:action="@{/api/todo/added}" th:object="${student}" method="POST">
+            <p>name: <input type="text" th:field="*{name}"/></p>
+            <p>old: <input type="number" th:field="*{old}"/></p>
+            <p>dtb: <input type="number" step="any" th:field="*{DTB}"/></p>
+            <p><button type="submit">Add</button></p>
+        </form>
+    </body>
+</html>

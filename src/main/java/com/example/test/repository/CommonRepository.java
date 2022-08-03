@@ -15,4 +15,8 @@ public interface CommonRepository<T> {
     public Set<T> findAll();
 
     public Integer getLast();
+
+    public Set<T> maxDTB();
+
+    public Set<T> searchByDTB(Float dtb);
 }

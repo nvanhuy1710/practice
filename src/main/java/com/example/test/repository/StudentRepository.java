@@ -1,15 +1,9 @@
 package com.example.test.repository;
 
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
-
+import com.example.test.domain.Student;
 import org.springframework.stereotype.Repository;
 
-import com.example.test.domain.Student;
+import java.util.*;
 
 @Repository
 public class StudentRepository implements CommonRepository<Student> {
@@ -60,7 +54,6 @@ public class StudentRepository implements CommonRepository<Student> {
 
         @Override
         public int compare(Student o1, Student o2) {
-            // TODO Auto-generated method stub
             int a = Integer.valueOf(o1.getId());
             int b = Integer.valueOf(o2.getId());
             return (a > b) ? 1 : -1;
@@ -78,6 +71,36 @@ public class StudentRepository implements CommonRepository<Student> {
             }
         }
         return d;
+    }
+
+    @Override
+    public Set<Student> maxDTB() {
+        float max = 0;
+        Set<Student> set = findAll();
+        for(Student tmp : set) {
+            if(max < tmp.getDTB()) {
+                max = tmp.getDTB();
+            }
+        }
+        Set<Student> maxDTBs = new TreeSet<>(new SortId());
+        for(Student tmp : set) {
+            if(tmp.getDTB() >= max) {
+                maxDTBs.add(tmp);
+            }
+        }
+        return maxDTBs;
+    }
+
+    @Override
+    public Set<Student> searchByDTB(Float dtb) {
+        Set<Student> a = new TreeSet<>(new SortId());
+        Set<Student> c = findAll();
+        for(Student b : c) {
+            if(b.getDTB() >= dtb) {
+                a.add(b);
+            }
+        }
+        return a;
     }
 }
 
