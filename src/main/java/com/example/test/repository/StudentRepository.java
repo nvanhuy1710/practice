@@ -41,6 +41,19 @@ public class StudentRepository implements CommonRepository<Student> {
     }
 
     @Override
+    public  Set<Student> findByName(String name) {
+        Set<Integer> b = students.keySet();
+        Set<Student> a = new TreeSet<>(new SortId());
+        for (Integer c : b) {
+            Student tmp = students.get(c);
+            if(name.equals(tmp.getName())) {
+                a.add(tmp);
+            }
+        }
+        return a;
+    }
+
+    @Override
     public Set<Student> findAll() {
         Set<Student> a = new TreeSet<>(new SortId());
         Set<Integer> b = students.keySet();
@@ -89,18 +102,6 @@ public class StudentRepository implements CommonRepository<Student> {
             }
         }
         return maxDTBs;
-    }
-
-    @Override
-    public Set<Student> searchByDTB(Float dtb) {
-        Set<Student> a = new TreeSet<>(new SortId());
-        Set<Student> c = findAll();
-        for(Student b : c) {
-            if(b.getDTB() >= dtb) {
-                a.add(b);
-            }
-        }
-        return a;
     }
 }
 

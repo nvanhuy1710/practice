@@ -12,11 +12,25 @@ public interface CommonRepository<T> {
 
     public T findById(Integer id);
 
+    public Set<T> findByName(String name);
+
     public Set<T> findAll();
 
     public Integer getLast();
 
     public Set<T> maxDTB();
 
-    public Set<T> searchByDTB(Float dtb);
+    public static String nameFormat(String name) {
+        char[] charArray = name.toCharArray();
+        for(int i = 0; i < charArray.length; i++) {
+            if(i == 0 || charArray[i-1] == 32) {
+                charArray[i] = Character.toUpperCase(charArray[i]);
+            }
+            else {
+                charArray[i] = Character.toLowerCase(charArray[i]);
+            }
+        }
+        name = String.valueOf(charArray);
+        return name;
+    }
 }

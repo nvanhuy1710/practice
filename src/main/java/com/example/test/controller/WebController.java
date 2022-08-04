@@ -61,17 +61,13 @@ public class WebController {
         return "index";
     }
 
-    // @GetMapping("/todo/{dtb}")
-    // public ResponseEntity<Set<Student>> getAllStudentBydtb(@PathVariable Float dtb) {
-    //     return ResponseEntity.ok(repository.searchByDTB(dtb));
-    // }
-    @RequestMapping(value = "/todo/add")
+    @GetMapping(value = "/todo/add")
     public String Add(Model model) {
         model.addAttribute("student", new Student());
         return "add";
     }
 
-    @RequestMapping(value = "/todo/added", method = { RequestMethod.POST, RequestMethod.PUT })
+    @RequestMapping(value = "/todo/add", method = { RequestMethod.POST, RequestMethod.PUT })
     // public ResponseEntity<?> postStudent(@Valid @RequestBody Student student, Errors errors) {
     //     if (errors.hasErrors()) {
     //         return ResponseEntity.badRequest().body(errors);
@@ -94,6 +90,7 @@ public class WebController {
         }
         Integer id = repository.getLast() + 1;
         student.setId(id);
+        student.setName(CommonRepository.nameFormat(student.getName()));
         Student result = repository.save(student);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                .buildAndExpand(result.getId()).toUri();
@@ -102,10 +99,22 @@ public class WebController {
     }
 
     @GetMapping("/todo/delete")
-    public String deleteStudent(@RequestParam String id, Model model) {
+    public String deleteStudent(@RequestParam String id) {
         Integer idtmp = Integer.valueOf(id);
         repository.delete(repository.findById(idtmp));
-        getIndex(model);
         return "success";
+    }
+
+    @GetMapping("/todo/find")
+    public String findStudent(Model model) {
+        model.addAttribute("student", new Student());
+        return "find";
+    }
+
+    @PostMapping("/todo/find")
+    public String findedStudent(@ModelAttribute Student student, Model model) {
+        Set<Student> students = repository.findByName(CommonRepository.nameFormat(student.getName()));
+        model.addAttribute("studentList",students);
+        return "index";
     }
 }

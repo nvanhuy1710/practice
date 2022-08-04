@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+    <style>
+        .center {
+            text-align:center;
+        }
+    </style>
+<link th:href="@{/css/decor.css}" rel="stylesheet"/>
+    <body>
+    <title>Add</title>
+    <div class="center">
         <head>Add student</head>
-        <form th:action="@{/api/todo/added}" th:object="${student}" method="POST">
-            <p>name: <input type="text" th:field="*{name}"/></p>
-            <p>old: <input type="number" th:field="*{old}"/></p>
-            <p>dtb: <input type="number" step="any" th:field="*{DTB}"/></p>
+        <form th:action="@{/api/todo/add}" th:object="${student}" method="POST">
+            <p>name: <input type="text" autofocus th:field="*{name}" required/></p>
+            <p>old: <input type="number" min="1" th:field="*{old}" required/></p>
+            <p>dtb: <input type="number" step="any" min="0" th:field="*{DTB}" required/></p>
             <p><button type="submit">Add</button></p>
         </form>
+    </div>
     </body>
 </html>
