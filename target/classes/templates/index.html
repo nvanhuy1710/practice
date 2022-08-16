@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html class="center">
+<html class="center" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <style>
         .center {
             text-align:center;
         }
-        table.center { width: auto; margin-left: auto; margin-right: auto; }
+        table.center { width: auto; margin-left: auto; margin-right: auto;}
     </style>
-    <title>Home</title>
-    <div class="center"><head>Student list</head></div>
+    <div class="center"><head><title>Student list</title></head></div>
     <body>
-        <table border="1" class="center">
+        <h1 class="center">Student list</h1>
+        <table border="1" class="center" bgcolor="#6b8e23">
             <tr>
                 <th>Id</th>
                 <th>Name</th>
@@ -23,7 +23,7 @@
                     <td><span th:text="*{student.getName()}"></span></td>
                     <td><span th:text="*{student.getOld()}"></span></td>
                     <td><span th:text="*{student.getDTB()}"></span></td>
-                    <td><a th:href="@{/api/todo/delete/(id=*{student.getId()})}">delete</a></td>
+                    <td><a th:href="@{/api/todo/delete(id=*{student.getId()})}">Delete</a></td>
                 </tr>
             </div>
         </table>

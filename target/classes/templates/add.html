@@ -6,14 +6,20 @@
         }
     </style>
 <link th:href="@{/css/decor.css}" rel="stylesheet"/>
+    <head><title>Add student</title></head>
     <body>
-    <title>Add</title>
     <div class="center">
-        <head>Add student</head>
+        <h1>Add Student</h1>
         <form th:action="@{/api/todo/add}" th:object="${student}" method="POST">
-            <p>name: <input type="text" autofocus th:field="*{name}" required/></p>
-            <p>old: <input type="number" min="1" th:field="*{old}" required/></p>
-            <p>dtb: <input type="number" step="any" min="0" th:field="*{DTB}" required/></p>
+            <p><label>Name:
+                <input type="text" autofocus th:field="*{name}" required/>
+            </label></p>
+            <p><label>Old:
+                <input type="number" min="1" th:field="*{old}" required/>
+            </label></p>
+            <p><label>DTB:
+                <input type="number" step="any" min="0" th:field="*{DTB}" required/>
+            </label></p>
             <p><button type="submit">Add</button></p>
         </form>
     </div>

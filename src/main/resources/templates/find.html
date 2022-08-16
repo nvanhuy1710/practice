@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<style>
+<style xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://www.w3.org/1999/xhtml">
     .center {
         text-align: center;
     }
@@ -7,11 +10,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Find</title>
-    <div class="center">Find</div>
 </head>
 <body class="center">
+<h1>Find student</h1>
 <form th:action="@{/api/todo/find}" th:object="${student}" method="POST">
-    <p>name: <input type="text" autofocus th:field="*{name}" required/></p>
+    <p><label>Name:
+        <input type="text" autofocus th:field="*{name}" required/>
+    </label></p>
     <p><button type="submit">Find</button></p>
 </form>
 </body>
+</html>
